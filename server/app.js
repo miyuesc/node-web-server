@@ -27,12 +27,12 @@ app.use(Cors())
 
 // 请求体转码
 app.use(BodyParser({
-    enableTypes: ['json'],
-    jsonLimit: '5mb',
-    strict: true,
-    onerror: function (err, ctx) {
-        ctx.throw('body parse error', 422)
-    }
+  enableTypes: ['json'],
+  jsonLimit: '5mb',
+  strict: true,
+  onerror: function (err, ctx) {
+    ctx.throw('body parse error', 422)
+  }
 }))
 
 // 返回值格式统一
@@ -46,7 +46,7 @@ app.use(router.allowedMethods())
 
 // 启动服务
 app.listen(port, host, () => {
-    console.log(`Application server is running on http://localhost:${port}`)
+  console.log(`Application server is running on http://localhost:${port}`)
 })
 
 export default app
