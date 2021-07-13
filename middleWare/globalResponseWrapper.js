@@ -10,24 +10,38 @@ const statusCodeMessageMap = {
   500: '请求访问超时'
 }
 
+/**
+ * 统一封装返回值
+ * @returns {
+ *   ctx.success(data, type): Fuction 成功时调用方法
+ *   ctx.fail(code): Fuction 失败时调用方法
+ * }
+ */
 const responseBody = () => {
   return async (ctx, next) => {
-    ctx.success = (data, type) => {
-      ctx.type = type || 'json'
-      ctx.body = {
-        code: '000000',
-        msg: statusCodeMessageMap['000000'] || '调用成功',
-        data
+    try {
+      ctx.success = (data, type) => {
+        ctx.type = type || 'json'
+        ctx.body = {
+          code: '000000',
+          msg: statusCodeMessageMap['000000'] || '调用成功',
+          success: true,
+          data
+        }
       }
-    }
-    ctx.fail = (msg) => {
-      ctx.type = 'json'
-      ctx.body = {
-        code: '000001',
-        msg: statusCodeMessageMap['000001'] || '调用失败'
+      ctx.fail = (code) => {
+        ctx.type = 'json'
+        ctx.body = {
+          code: code,
+          msg: statusCodeMessageMap[code] || '调用失败',
+          data: null,
+          success: false
+        }
       }
+      await next()
+    } catch (e) {
+      console.log(e)
     }
-    await next()
   }
 }
 

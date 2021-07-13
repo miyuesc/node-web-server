@@ -1,5 +1,4 @@
 async function getUserInfo(ctx) {
-
   ctx.success({
     name: 'User1',
     sex: 0,
@@ -10,13 +9,7 @@ async function getUserInfo(ctx) {
 }
 
 async function getErrorMsg(ctx) {
-
-  console.log(ctx.prototype)
-
-  ctx.success({
-    code: '000001',
-    msg: '操作失败'
-  })
+  ctx.fail('000001')
 }
 
 export default {
