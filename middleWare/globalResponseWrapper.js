@@ -22,12 +22,15 @@ const responseBody = () => {
     try {
       ctx.success = (data, type) => {
         ctx.type = type || 'json'
-        ctx.body = {
-          code: '000000',
-          msg: statusCodeMessageMap['000000'] || '调用成功',
-          success: true,
-          data
-        }
+        if (type && type === 'text/html') {
+          ctx.body = data
+        } else {
+          ctx.body = {
+            code: '000000',
+            msg: statusCodeMessageMap['000000'] || '调用成功',
+            success: true,
+            data
+          }}
       }
       ctx.fail = (code) => {
         ctx.type = 'json'
