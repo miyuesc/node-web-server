@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node index.js",
+    "start:prod": "node index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix"
   },
